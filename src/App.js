@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import PrivateRoutes from './components/PrivateRoutes'
+import { 
+  Routes, 
+  Route, 
+  Navigate,
+} from 'react-router-dom'
+import * as AuthPages from './apps/Auth/pages'
 
-function App() {
+const TempComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div>Hello, World</div>
+  )
 }
 
-export default App;
+
+const App = () => {
+  return (
+    <Routes>
+      <Route element={<PrivateRoutes />}>
+        <Route path="/" element={<TempComponent/>} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Route>
+      <Route path='/auth/login' element={<AuthPages.Login />} />
+    </Routes>
+  )
+}
+
+export default App
